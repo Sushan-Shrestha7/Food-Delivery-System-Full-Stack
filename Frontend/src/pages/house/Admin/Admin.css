@@ -1,0 +1,117 @@
+.admin-login-wrapper,
+.add-item-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: calc(100vh - 200px);
+    padding: 60px 24px;
+}
+
+.admin-login-form,
+.add-item-form {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    padding: 32px 36px;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.admin-login-form h2,
+.add-item-form h2 {
+    margin: 0 0 6px;
+    font-size: 22px;
+    color: #333;
+    text-align: center;
+}
+
+.admin-login-form label,
+.add-item-form label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #49557e;
+    margin-bottom: -8px;
+}
+
+.admin-login-form input,
+.add-item-form input,
+.add-item-form textarea {
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    outline-color: #ff4d4d;
+    transition: border-color 0.2s ease;
+}
+
+.admin-login-form input:focus,
+.add-item-form input:focus,
+.add-item-form textarea:focus {
+    border-color: #ff4d4d;
+}
+
+.add-item-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.add-item-row {
+    display: flex;
+    gap: 14px;
+}
+
+.add-item-row>div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.add-item-row label {
+    margin-bottom: 0;
+}
+
+.admin-login-form button,
+.add-item-form button {
+    margin-top: 10px;
+    background: linear-gradient(135deg, #ff7a59 0%, #ff4d4d 100%);
+    color: #fff;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(255, 77, 77, 0.25);
+}
+
+.admin-login-form button:hover,
+.add-item-form button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 14px 30px rgba(255, 77, 77, 0.35);
+}
+
+.admin-login-form button:active,
+.add-item-form button:active {
+    transform: scale(0.98);
+}
+
+.admin-login-error {
+    color: #ff4d4d;
+    font-size: 13px;
+    margin: 0;
+    text-align: center;
+}
+
+.add-item-message {
+    font-size: 13px;
+    margin: 0;
+    text-align: center;
+    color: #ff4d4d;
+}

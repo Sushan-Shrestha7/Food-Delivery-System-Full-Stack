@@ -1,0 +1,138 @@
+.place-order {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: max(5vw, 20px);
+  padding: 40px 4vw 100px;
+  flex-wrap: wrap;
+}
+
+.place-order-left {
+  width: 100%;
+  max-width: 460px;
+}
+
+.place-order-left .title {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.place-order-left input {
+  margin-bottom: 15px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #c5c5c5;
+  border-radius: 4px;
+  outline-color: tomato;
+  font-size: 15px;
+}
+
+.multi-fields {
+  display: flex;
+  gap: 10px;
+}
+
+.payment-method {
+  margin-bottom: 15px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #c5c5c5;
+  border-radius: 4px;
+  outline-color: tomato;
+  font-size: 15px;
+  color: #333;
+  background-color: #fff;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23555'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 36px;
+  transition: border-color 0.2s ease;
+}
+
+.payment-method:hover,
+.payment-method:focus {
+  border-color: tomato;
+  outline: none;
+}
+
+.place-order-right {
+  width: 100%;
+  max-width: 400px;
+}
+
+.place-order-right .cart-totals {
+  flex: 1;
+}
+
+.cart-totals h2 {
+  margin-bottom: 20px;
+}
+
+.cart-totals-details {
+  display: flex;
+  justify-content: space-between;
+  color: #555;
+  margin: 10px 0;
+}
+
+.cart-totals hr {
+  margin: 10px 0;
+  height: 1px;
+  background-color: #e2e2e2;
+  border: none;
+}
+
+.cart-totals button {
+  border: none;
+  color: white;
+  background-color: tomato;
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+.cart-totals button:hover {
+  background-color: #e0533d;
+}
+
+.cart-totals button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.error-text {
+  color: #d32f2f;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.success-text {
+  color: #2e7d32;
+  background-color: #e8f5e9;
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+@media (max-width: 750px) {
+  .place-order {
+    flex-direction: column;
+  }
+
+  .place-order-left,
+  .place-order-right {
+    max-width: 100%;
+  }
+}

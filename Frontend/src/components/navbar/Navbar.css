@@ -1,0 +1,252 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.navbar-logo {
+  width: 270px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 35px;
+  list-style: none;
+  color: #49557e;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.navbar-links li {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.navbar-links li:hover {
+  color: #ff4d4d;
+}
+
+.navbar-links .active {
+  color: #ff4d4d;
+  border-bottom: 2px solid #ff4d4d;
+  padding-bottom: 4px;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.navbar-icon {
+  width: 24px;
+  cursor: pointer;
+}
+
+.navbar-search-icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.dot {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 10px;
+  height: 10px;
+  background: #ff4d4d;
+  border-radius: 50%;
+}
+
+.navbar-sign-in {
+  background: linear-gradient(135deg, #ff7a59 0%, #ff4d4d 100%);
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  padding: 14px 36px;
+  min-width: 140px;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(255, 77, 77, 0.25);
+}
+
+.navbar-sign-in:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 16px 35px rgba(255, 77, 77, 0.35);
+}
+
+.navbar-sign-in:active {
+  transform: scale(0.98);
+}
+
+.navbar-profile {
+  position: relative;
+}
+
+.navbar-profile-icon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: opacity 0.2s ease;
+}
+
+.navbar-profile-icon:hover {
+  opacity: 0.8;
+}
+
+.navbar-profile-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  list-style: none;
+  padding: 12px 0;
+  margin: 0;
+  min-width: 160px;
+  z-index: 100;
+}
+
+.navbar-profile-dropdown::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 14px;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  transform: rotate(45deg);
+  box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.navbar-profile-dropdown li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #49557e;
+  font-size: 15px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.navbar-profile-dropdown li:hover {
+  background-color: #fff5f5;
+  color: #ff4d4d;
+}
+
+.navbar-profile-dropdown li img {
+  width: 18px;
+  height: 18px;
+}
+
+.navbar-profile-dropdown li p {
+  margin: 0;
+}
+
+.navbar-profile-dropdown hr {
+  margin: 6px 0;
+  border: none;
+  height: 1px;
+  background-color: #f0f0f0;
+}
+
+.navbar-search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar-search-input {
+  padding: 8px 14px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 14px;
+  outline-color: #ff4d4d;
+  width: 200px;
+  transition: width 0.3s ease;
+}
+
+.navbar-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-results-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  width: 280px;
+  max-height: 320px;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+  padding: 8px 0;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-result-item:hover {
+  background-color: #fff5f5;
+}
+
+.search-result-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.search-result-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-result-name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.search-result-price {
+  margin: 0;
+  font-size: 13px;
+  color: #ff4d4d;
+}
+
+.search-no-results {
+  padding: 12px 16px;
+  color: #888;
+  font-size: 14px;
+  margin: 0;
+}

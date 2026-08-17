@@ -1,0 +1,17 @@
+.food-display {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.food-display h2 {
+  color: #262626;
+  font-weight: 600;
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+}
+
+.food-display-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
