@@ -13,8 +13,8 @@ export class MailService {
       process.env.RESEND_API_KEY ||
       "";
 
-    // Use Resend's shared testing domain until you verify your own domain.
-    // Once you verify a domain in Resend, switch this to e.g. "noreply@yourdomain.com"
+    
+    
     this.fromAddress =
       this.configService.get<string>("MAIL_FROM") ||
       process.env.MAIL_FROM ||

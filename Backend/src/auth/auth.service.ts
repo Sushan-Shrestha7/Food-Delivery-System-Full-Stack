@@ -18,7 +18,7 @@ import { Otp } from "./otp.entity";
 import { MailService } from "../mail/mail.service";
 
 const SALT_ROUNDS = 10;
-const OTP_TTL_MS = 5 * 60 * 1000; // 5 minutes
+const OTP_TTL_MS = 5 * 60 * 1000; 
 
 @Injectable()
 export class AuthService {
@@ -45,14 +45,7 @@ export class AuthService {
     await this.mailService.sendOtp(email, code);
   }
 
-  /**
-   * SIGNUP
-   * Always creates an *unverified* account and sends an OTP.
-   * Does NOT accept a code here anymore — verification is a separate
-   * step handled exclusively by verifyOtp(). This keeps signup's
-   * responsibility single-purpose and avoids frontend flows getting
-   * confused about which step they're on.
-   */
+  
   async signup(dto: SignupDto) {
     const existing = await this.usersService.findByEmail(dto.email);
     if (existing) {
@@ -71,7 +64,7 @@ export class AuthService {
       await this.generateAndSendOtp(dto.email);
     } catch (err: any) {
       console.error(`[AuthService] Signup OTP dispatch failed for ${dto.email}:`, err?.message || err);
-      // Don't leave a stuck, unverified account behind if email failed
+      
       await this.usersService.remove(user.id);
       throw new BadRequestException(
         "We couldn't send the verification email. Please check your email address and try again.",
@@ -85,12 +78,7 @@ export class AuthService {
     };
   }
 
-  /**
-   * VERIFY OTP
-   * The single place that consumes an OTP code and marks a user verified.
-   * Used both right after signup, and if a user comes back later
-   * (via login) still unverified.
-   */
+  
   async verifyOtp(dto: VerifyOtpDto) {
     const record = await this.otpRepo.findOne({
       where: { email: dto.email, code: dto.code },
@@ -134,14 +122,7 @@ export class AuthService {
     return { message: `Verification OTP resent to ${dto.email}`, email: dto.email };
   }
 
-  /**
-   * LOGIN
-   * If credentials are correct but the account isn't verified yet,
-   * we auto-send a fresh OTP and throw a structured error with a
-   * `code: "EMAIL_NOT_VERIFIED"` field. The frontend should check
-   * THIS field (not the message string) to decide whether to route
-   * the user to the OTP screen.
-   */
+  
   async login(dto: LoginDto) {
     const user = await this.usersService.findByEmail(dto.email);
     if (!user) {

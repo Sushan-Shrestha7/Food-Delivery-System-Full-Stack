@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./PlaceOrder.css";
 import { StoreContext } from "../../../../content/storeContext";
-import BanepaLocationPicker from "./BanepaLocationPicker"; // adjust path to wherever you saved it
+import BanepaLocationPicker from "./BanepaLocationPicker"; 
 
 const NEPAL_PROVINCES = [
   "Koshi",
@@ -56,7 +56,7 @@ const PlaceOrder = () => {
     setData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Called when user clicks a spot on the map
+  
   const onMapLocationSelect = ({ line1, line2, district, province }) => {
     setData((prev) => ({
       ...prev,
@@ -120,7 +120,7 @@ const PlaceOrder = () => {
         {error && <p className="error-text">{error}</p>}
         {successMessage && <p className="success-text">{successMessage}</p>}
 
-        {/* Map picker - click a spot in Banepa to auto-fill address fields below */}
+        {}
         <BanepaLocationPicker onLocationSelect={onMapLocationSelect} />
 
         <input

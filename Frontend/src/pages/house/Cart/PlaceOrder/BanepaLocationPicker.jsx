@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-// Banepa municipality bounding box (approx). Tighten/adjust as needed.
+
 const BANEPA_BOUNDS = [
-  [27.615, 85.51], // SW corner
-  [27.66, 85.545], // NE corner
+  [27.615, 85.51], 
+  [27.66, 85.545], 
 ];
 const BANEPA_CENTER = [27.6357, 85.522];
 
-// onLocationSelect receives: { line1, line2, district, province, lat, lng }
+
 export default function BanepaLocationPicker({ onLocationSelect }) {
   const mapRef = useRef(null);
   const markerRef = useRef(null);
@@ -21,7 +21,7 @@ export default function BanepaLocationPicker({ onLocationSelect }) {
       zoom: 15,
       minZoom: 14,
       maxBounds: BANEPA_BOUNDS,
-      maxBoundsViscosity: 1.0, // hard-locks panning to Banepa only
+      maxBoundsViscosity: 1.0, 
     });
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -46,12 +46,12 @@ export default function BanepaLocationPicker({ onLocationSelect }) {
         const data = await res.json();
         const addr = data.address || {};
 
-        // Map Nominatim fields -> PlaceOrder.jsx's data state fields
+        
         const line1 =
           addr.road || addr.neighbourhood || addr.suburb || data.display_name;
         const line2 = addr.suburb || addr.city_district || "";
         const district = addr.county || addr.state_district || "Kavre";
-        const province = "Bagmati"; // fixed, since bounds are locked to Banepa/Kavre
+        const province = "Bagmati"; 
 
         onLocationSelect({
           line1,

@@ -1,15 +1,17 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./login.css";
 import { assets } from "../../assets/frontend_assets/assets";
 import { StoreContext } from "../../content/storeContext";
 import axios from "axios";
 
-// Use an env var so this works both locally and after deployment.
+
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 const Login = ({ setShowLogin }) => {
   const { setToken } = useContext(StoreContext);
-  const [currentState, setCurrentState] = useState("Log in"); // "Log in" | "Sign Up" | "OTP"
+  const navigate = useNavigate();
+  const [currentState, setCurrentState] = useState("Log in"); 
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -23,7 +25,7 @@ const Login = ({ setShowLogin }) => {
   const [loading, setLoading] = useState(false);
   const [resendTimer, setResendTimer] = useState(0);
 
-  // Countdown timer for OTP resend
+  
   useEffect(() => {
     let interval = null;
     if (resendTimer > 0) {
@@ -62,7 +64,7 @@ const Login = ({ setShowLogin }) => {
       const response = await axios.post(url, payload);
 
       if (isSignUp) {
-        // Move to OTP verification step
+        
         const activeEmail = response.data?.email || data.email.trim();
         setTargetEmail(activeEmail);
         setCurrentState("OTP");
@@ -73,6 +75,11 @@ const Login = ({ setShowLogin }) => {
         localStorage.setItem("token", response.data.token);
         setToken(response.data.token);
         setShowLogin(false);
+
+        
+        if (response.data.user && response.data.user.role === "admin") {
+          navigate("/admin/add-item");
+        }
       }
     } catch (err) {
       const responseData = err.response?.data;
@@ -122,6 +129,11 @@ const Login = ({ setShowLogin }) => {
       localStorage.setItem("token", response.data.token);
       setToken(response.data.token);
       setShowLogin(false);
+
+      
+      if (response.data.user && response.data.user.role === "admin") {
+        navigate("/admin/add-item");
+      }
     } catch (err) {
       setError(
         err.response?.data?.message ||
