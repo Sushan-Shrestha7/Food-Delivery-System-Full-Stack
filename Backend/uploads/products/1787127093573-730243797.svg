@@ -1,0 +1,31 @@
+<svg width="520" height="160" viewBox="0 0 520 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="flame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B4A"/>
+      <stop offset="100%" stop-color="#D8281E"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E8291B"/>
+      <stop offset="100%" stop-color="#FF5A3C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon: stylized flame/trident mark for Ugrachandi -->
+  <g transform="translate(15, 25)">
+    <path d="M55 0
+             C60 18 78 26 78 48
+             C78 68 62 82 42 82
+             C20 82 4 66 4 45
+             C4 30 14 20 20 10
+             C18 24 26 32 32 32
+             C32 20 40 10 48 0
+             C46 12 50 20 58 26
+             C56 16 54 8 55 0 Z"
+          fill="url(#flame)"/>
+    <circle cx="41" cy="50" r="10" fill="#FFF3E8"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="118" y="98" font-family="Georgia, 'Times New Roman', serif" font-size="56" font-weight="700" fill="url(#textGrad)">Ugrachandi</text>
+  <text x="120" y="122" font-family="Arial, sans-serif" font-size="16" letter-spacing="4" fill="#8A8A8A">FOOD DELIVERY</text>
+</svg>

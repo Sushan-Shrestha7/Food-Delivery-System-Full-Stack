@@ -1,117 +1,185 @@
-.admin-login-wrapper,
+Admin · CSS .admin-login-wrapper,
 .add-item-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: calc(100vh - 200px);
-    padding: 60px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 200px);
+  padding: 60px 24px;
 }
 
 .admin-login-form,
 .add-item-form {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    padding: 32px 36px;
-    width: 100%;
-    max-width: 420px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 32px 36px;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .admin-login-form h2,
 .add-item-form h2 {
-    margin: 0 0 6px;
-    font-size: 22px;
-    color: #333;
-    text-align: center;
+  margin: 0 0 6px;
+  font-size: 22px;
+  color: #333;
+  text-align: center;
 }
 
 .admin-login-form label,
 .add-item-form label {
-    font-size: 13px;
-    font-weight: 500;
-    color: #49557e;
-    margin-bottom: -8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #49557e;
+  margin-bottom: -8px;
 }
 
 .admin-login-form input,
 .add-item-form input,
 .add-item-form textarea {
-    padding: 10px 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 14px;
-    font-family: inherit;
-    outline-color: #ff4d4d;
-    transition: border-color 0.2s ease;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  outline-color: #ff4d4d;
+  transition: border-color 0.2s ease;
 }
 
 .admin-login-form input:focus,
 .add-item-form input:focus,
 .add-item-form textarea:focus {
-    border-color: #ff4d4d;
+  border-color: #ff4d4d;
 }
 
 .add-item-form textarea {
-    resize: vertical;
-    min-height: 80px;
+  resize: vertical;
+  min-height: 80px;
 }
 
 .add-item-row {
-    display: flex;
-    gap: 14px;
+  display: flex;
+  gap: 14px;
 }
 
-.add-item-row>div {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+.add-item-row > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .add-item-row label {
-    margin-bottom: 0;
+  margin-bottom: 0;
+}
+
+/* Image upload dropzone (replaces the old Image URL text input) */
+.add-item-image-drop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 14px;
+  border: 1.5px dashed #ddd;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #999;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.add-item-image-drop:hover {
+  border-color: #ff4d4d;
+  background: #fff8f7;
+}
+
+.add-item-image-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.add-item-image-preview img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  flex-shrink: 0;
+}
+
+.add-item-image-preview span {
+  flex: 1;
+  font-size: 13px;
+  color: #49557e;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.add-item-image-preview button {
+  margin-top: 0;
+  background: none;
+  box-shadow: none;
+  color: #ff4d4d;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: normal;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.add-item-image-preview button:hover {
+  background: #ffeceb;
+  transform: none;
+  box-shadow: none;
 }
 
 .admin-login-form button,
 .add-item-form button {
-    margin-top: 10px;
-    background: linear-gradient(135deg, #ff7a59 0%, #ff4d4d 100%);
-    color: #fff;
-    border: none;
-    border-radius: 40px;
-    cursor: pointer;
-    padding: 12px 24px;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 25px rgba(255, 77, 77, 0.25);
+  margin-top: 10px;
+  background: linear-gradient(135deg, #ff7a59 0%, #ff4d4d 100%);
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(255, 77, 77, 0.25);
 }
 
 .admin-login-form button:hover,
 .add-item-form button:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 14px 30px rgba(255, 77, 77, 0.35);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 30px rgba(255, 77, 77, 0.35);
 }
 
 .admin-login-form button:active,
 .add-item-form button:active {
-    transform: scale(0.98);
+  transform: scale(0.98);
 }
 
 .admin-login-error {
-    color: #ff4d4d;
-    font-size: 13px;
-    margin: 0;
-    text-align: center;
+  color: #ff4d4d;
+  font-size: 13px;
+  margin: 0;
+  text-align: center;
 }
 
 .add-item-message {
-    font-size: 13px;
-    margin: 0;
-    text-align: center;
-    color: #ff4d4d;
+  font-size: 13px;
+  margin: 0;
+  text-align: center;
+  color: #ff4d4d;
 }
