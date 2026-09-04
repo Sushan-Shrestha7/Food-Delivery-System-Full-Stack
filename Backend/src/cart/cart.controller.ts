@@ -38,7 +38,7 @@ export class CartController {
     return this.cartService.updateItem(user.id, dto);
   }
 
-  
+
 
   @Delete("remove/:productId")
   removeItem(
@@ -51,5 +51,4 @@ export class CartController {
   @Delete("clear")
   clearCart(@CurrentUser() user: User) {
     return this.cartService.clearCart(user.id);
-  }
-}
+  }}

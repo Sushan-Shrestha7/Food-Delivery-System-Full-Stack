@@ -4,7 +4,7 @@ export function getRating(id) {
   for (let i = 0; i < str.length; i++) {
     hash = (hash * 31 + str.charCodeAt(i)) >>> 0;
   }
-  const steps = 16; 
+  const steps = 16;
   const value = 3.5 + (hash % steps) * 0.1;
   return Math.round(value * 10) / 10;
 }

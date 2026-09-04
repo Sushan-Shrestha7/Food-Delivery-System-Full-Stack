@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./PlaceOrder.css";
 import { StoreContext } from "../../../../content/storeContext";
-import BanepaLocationPicker from "./BanepaLocationPicker"; 
+import BanepaLocationPicker from "./BanepaLocationPicker";
 
 const NEPAL_PROVINCES = [
   "Koshi",
@@ -46,8 +46,7 @@ const PlaceOrder = () => {
         console.error("Failed to load cart totals", err);
       } finally {
         setCartLoading(false);
-      }
-    };
+      }};
     fetchCart();
   }, [url, token]);
 
@@ -56,7 +55,7 @@ const PlaceOrder = () => {
     setData((prev) => ({ ...prev, [name]: value }));
   };
 
-  
+
   const onMapLocationSelect = ({ line1, line2, district, province }) => {
     setData((prev) => ({
       ...prev,
@@ -109,8 +108,7 @@ const PlaceOrder = () => {
     } catch (err) {
       setError(err.response?.data?.message || "Failed to place order");
       setLoading(false);
-    }
-  };
+    }};
 
   return (
     <form className="place-order" onSubmit={onSubmitHandler}>
@@ -157,10 +155,8 @@ const PlaceOrder = () => {
             {NEPAL_PROVINCES.map((p) => (
               <option key={p} value={p}>
                 {p}
-              </option>
-            ))}
-          </select>
-        </div>
+              </option>))}
+          </select></div>
 
         <input
           name="landmark"
@@ -188,8 +184,7 @@ const PlaceOrder = () => {
           <option value="cod">Cash on Delivery</option>
           <option value="card">Card</option>
           <option value="wallet">Wallet</option>
-        </select>
-      </div>
+        </select></div>
 
       <div className="place-order-right">
         <div className="cart-totals">
@@ -208,14 +203,11 @@ const PlaceOrder = () => {
             <div className="cart-totals-details">
               <b>Total</b>
               <b>{cartLoading ? "..." : `Rs${grandTotal}`}</b>
-            </div>
-          </div>
+            </div></div>
           <button type="submit" disabled={loading || cartLoading}>
             {loading ? "PLACING ORDER..." : "PROCEED TO PAYMENT"}
-          </button>
-        </div>
-      </div>
-    </form>
+          </button></div>
+      </div></form>
   );
 };
 

@@ -44,9 +44,7 @@ export class MailService implements OnModuleInit {
         this.logger.warn(
           `⚠️ SMTP Transporter verification failed: ${err?.message || err}. Email sending may fail if credentials or network settings are incorrect.`
         );
-      }
-    }
-  }
+      }}}
 
   private initTransporter(): void {
     const host =
@@ -130,8 +128,7 @@ export class MailService implements OnModuleInit {
         err?.stack
       );
       throw err;
-    }
-  }
+    }}
 
   async sendOtp(toEmail: string, otp: string): Promise<void> {
     const subject = "Your Verification Code - Ugrachandi Food Delivery";
@@ -142,7 +139,7 @@ export class MailService implements OnModuleInit {
           <h2 style="color: #ff6347; margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.5px;">Ugrachandi Food Delivery</h2>
           <p style="color: #64748b; font-size: 14px; margin-top: 6px;">Account Verification</p>
         </div>
-        
+
         <div style="background-color: #f8fafc; border: 1px solid #f1f5f9; border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 24px;">
           <p style="color: #334155; font-size: 15px; margin: 0 0 16px 0; font-weight: 500;">
             Use the following 6-digit verification code to complete your request:
@@ -211,6 +208,4 @@ export class MailService implements OnModuleInit {
       });
     } catch (err: any) {
       this.logger.warn(`Could not deliver welcome email to ${toEmail}: ${err?.message || err}`);
-    }
-  }
-}
+    }}}

@@ -9,5 +9,4 @@ export class AssistantController {
   @Post("chat")
   async chat(@Body() dto: ChatMessageDto) {
     return this.assistantService.chat(dto.message);
-  }
-}
+  }}

@@ -11,8 +11,9 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
+import * as fs from "fs";
 import { diskStorage } from "multer";
-import { extname } from "path";
+import { extname, join } from "path";
 import { ApiBearerAuth, ApiConsumes } from "@nestjs/swagger";
 import { ProductsService } from "./products.service";
 import { CreateProductDto } from "./dto/create-product.dto";
@@ -42,7 +43,13 @@ export class ProductsController {
   @UseInterceptors(
     FileInterceptor("image", {
       storage: diskStorage({
-        destination: "./uploads/products", // make sure this folder exists and is served statically
+        destination: (req, file, cb) => {
+          const uploadDir = join(process.cwd(), "uploads", "products");
+          if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir, { recursive: true });
+          }
+          cb(null, uploadDir);
+        },
         filename: (req, file, cb) => {
           const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
           cb(null, `${unique}${extname(file.originalname)}`);
@@ -67,8 +74,18 @@ export class ProductsController {
     return this.productsService.create(dto);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles("admin")
+  @Delete("name/:name")
+  removeByName(@Param("name") name: string) {
+    return this.productsService.removeByName(name);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles("admin")
   @Delete(":id")
   remove(@Param("id", ParseIntPipe) id: number) {
     return this.productsService.remove(id);
-  }
-}
+  }}

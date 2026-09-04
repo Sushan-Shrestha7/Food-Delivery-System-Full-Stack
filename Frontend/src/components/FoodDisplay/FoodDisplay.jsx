@@ -16,8 +16,7 @@ const FoodDisplay = ({ category }) => {
         setProducts(res.data);
       } catch (err) {
         console.error("Failed to load products", err);
-      }
-    };
+      }};
     fetchProducts();
   }, [url]);
 
@@ -46,8 +45,7 @@ const FoodDisplay = ({ category }) => {
             image={imageMap[item.imageUrl]}
           />
         ))}
-      </div>
-    </div>
+      </div></div>
   );
 };
 

@@ -13,8 +13,7 @@ const Home = () => {
       <Menu category={category} setcategory={setcategory} />
       <FoodDisplay category={category} />
       <AppDownload />
-    </div>
-  );
+    </div>);
 };
 
 export default Home;

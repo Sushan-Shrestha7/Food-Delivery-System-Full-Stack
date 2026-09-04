@@ -12,8 +12,7 @@ const AppDownload = () => {
         if (entry.isIntersecting) {
           setIsVisible(true);
           observer.unobserve(entry.target);
-        }
-      },
+        }},
       { threshold: 0.3 },
     );
 
@@ -29,8 +28,7 @@ const AppDownload = () => {
       <div className="app-download-platforms">
         <img src={assets.play_store} alt="play store" />
         <img src={assets.app_store} alt="app store" />
-      </div>
-    </div>
+      </div></div>
   );
 };
 

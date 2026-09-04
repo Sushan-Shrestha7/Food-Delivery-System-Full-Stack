@@ -11,8 +11,7 @@ async function bootstrap() {
   try {
     if (typeof (dns as any).setDefaultResultOrder === "function") {
       (dns as any).setDefaultResultOrder("ipv4first");
-    }
-  } catch (err) {
+    }} catch (err) {
     console.warn(
       "dns.setDefaultResultOrder not available:",
       err?.message || err,
@@ -35,7 +34,7 @@ async function bootstrap() {
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
-  // Serve uploaded product images at http://localhost:<port>/uploads/products/<filename>
+
   app.useStaticAssets(join(__dirname, "..", "uploads"), {
     prefix: "/uploads/",
   });

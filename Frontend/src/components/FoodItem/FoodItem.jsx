@@ -11,7 +11,15 @@ const FoodItem = ({ id, name, price, description, image }) => {
   return (
     <div className="food-item">
       <div className="food-item-img-container">
-        <img className="food-item-image" src={image} alt={name} />
+        <img
+          className="food-item-image"
+          src={image || assets.food_1}
+          alt={name}
+          onError={(e) => {
+            if (e.currentTarget.src !== assets.food_1) {
+              e.currentTarget.src = assets.food_1;
+            }}}
+        />
 
         {!cartItems[id] ? (
           <img
@@ -35,8 +43,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
               src={assets.add_icon_green}
               alt="Add"
             />
-          </div>
-        )}
+          </div>)}
       </div>
 
       <div className="food-item-info">
@@ -49,15 +56,13 @@ const FoodItem = ({ id, name, price, description, image }) => {
             {renderStars(rating)}{" "}
             <span style={{ color: "#555", fontSize: "12px" }}>
               ({rating.toFixed(1)})
-            </span>
-          </span>
+            </span></span>
         </div>
 
         <p className="food-item-desc">{description}</p>
 
         <p className="food-item-price">Rs {price}</p>
-      </div>
-    </div>
+      </div></div>
   );
 };
 

@@ -37,5 +37,4 @@ export class OrdersController {
   @Patch(":id/cancel")
   cancel(@CurrentUser() user: User, @Param("id") id: string) {
     return this.ordersService.cancelOrder(user.id, id);
-  }
-}
+  }}

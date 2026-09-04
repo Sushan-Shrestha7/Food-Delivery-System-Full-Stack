@@ -13,8 +13,7 @@ const Footer = () => {
             <img src={assets.facebook_icon} alt="Facebook" />
             <img src={assets.twitter_icon} alt="Twitter" />
             <img src={assets.linkedin_icon} alt="LinkedIn" />
-          </div>
-        </div>
+          </div></div>
 
         <div className="footer-content-center">
           <h2>Company</h2>
@@ -24,8 +23,7 @@ const Footer = () => {
             <li>Menu</li>
             <li>Careers</li>
             <li>Privacy policy</li>
-          </ul>
-        </div>
+          </ul></div>
 
         <div className="footer-content-right" id="footer-contact">
           <h2>Get in Touch</h2>
@@ -34,15 +32,13 @@ const Footer = () => {
             <li>sushan1234@gmail.com</li>
             <li>Banepa-4, Kavre</li>
             <li>Mon - Sun: 9AM - 10PM</li>
-          </ul>
-        </div>
+          </ul></div>
       </div>
 
       <hr />
       <p className="footer-copyright">
         © 2026 Ugrachandi Food Delivery. All rights reserved.
-      </p>
-    </div>
+      </p></div>
   );
 };
 

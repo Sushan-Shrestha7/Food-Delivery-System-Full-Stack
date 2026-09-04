@@ -250,3 +250,30 @@
   font-size: 14px;
   margin: 0;
 }
+
+.navbar-admin-btn {
+  background: linear-gradient(135deg, #ff5722 0%, #ff4d4d 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(255, 77, 77, 0.3);
+  white-space: nowrap;
+}
+
+.navbar-admin-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255, 77, 77, 0.45);
+}
+
+.navbar-links .admin-nav-link {
+  color: #ff4d4d;
+  font-weight: 600;
+}

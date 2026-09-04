@@ -33,4 +33,21 @@ export class ProductsService {
     await this.productsRepository.remove(product);
     return { message: `Product ${id} deleted successfully` };
   }
-}
+
+  async removeByName(name: string) {
+    const trimmed = decodeURIComponent(name).trim();
+    const product = await this.productsRepository
+      .createQueryBuilder("product")
+      .where("LOWER(product.name) = LOWER(:name)", { name: trimmed })
+      .getOne();
+
+    if (!product) {
+      throw new NotFoundException(`Product with name "${trimmed}" not found`);
+    }
+
+    await this.productsRepository.remove(product);
+    return {
+      message: `Product "${product.name}" deleted successfully`,
+      deletedProduct: product,
+    };
+  }}

@@ -29,7 +29,7 @@ const products = [
       "Grilled chicken breast over mixed greens with a herb yogurt dressing",
   },
 
-  
+
   {
     name: "Lasagna Rolls",
     imageUrl: "food_5.png",
@@ -63,7 +63,7 @@ const products = [
       "Crispy mixed-vegetable filling wrapped and lightly fried until golden",
   },
 
-  
+
   {
     name: "Ripple Ice Cream",
     imageUrl: "food_9.png",
@@ -97,7 +97,7 @@ const products = [
       "Classic rich and creamy vanilla ice cream made with real vanilla bean",
   },
 
-  
+
   {
     name: "Chicken Sandwich",
     imageUrl: "food_13.png",
@@ -130,7 +130,7 @@ const products = [
       "Soft bread layered with fresh vegetables, chutney, and spices",
   },
 
-  
+
   {
     name: "Cup Cake",
     imageUrl: "food_17.png",
@@ -161,7 +161,7 @@ const products = [
     description: "Classic vanilla sponge cake sliced and served fresh",
   },
 
-  
+
   {
     name: "Garlic Mushroom",
     imageUrl: "food_21.png",
@@ -193,7 +193,7 @@ const products = [
       "Steamed rice served with sauteed zucchini, herbs, and a soft egg",
   },
 
-  
+
   {
     name: "Cheese Pasta",
     imageUrl: "food_25.png",
@@ -223,7 +223,7 @@ const products = [
     description: "Pasta with grilled chicken strips in a creamy herb sauce",
   },
 
-  
+
   {
     name: "Butter Noodles",
     imageUrl: "food_29.png",
@@ -254,7 +254,7 @@ const products = [
     description: "Soft boiled noodles served in a light vegetable broth",
   },
 
-  
+
   {
     name: "Steam Momo",
     imageUrl: "momo_1.png",

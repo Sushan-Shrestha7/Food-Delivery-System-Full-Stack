@@ -26,8 +26,7 @@ const Orders = () => {
         console.error(err);
       } finally {
         setLoading(false);
-      }
-    };
+      }};
     fetchOrders();
   }, [url, token]);
 
@@ -39,8 +38,7 @@ const Orders = () => {
           <p>Order ID: {justPlacedOrder.id}</p>
           <p>Total: Rs{justPlacedOrder.totalAmount}</p>
           <p>Status: {justPlacedOrder.status}</p>
-        </div>
-      )}
+        </div>)}
 
       <h2 className="orders-title">Your Orders</h2>
 
@@ -56,14 +54,11 @@ const Orders = () => {
               <span>Order #{order.id}</span>
               <span className={`order-status status-${order.status}`}>
                 {order.status}
-              </span>
-            </div>
+              </span></div>
             <p>Total: Rs{order.totalAmount}</p>
             <p>Placed: {new Date(order.placedAt).toLocaleString()}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+          </div>))}
+      </div></div>
   );
 };
 

@@ -18,7 +18,7 @@ import { Otp } from "./otp.entity";
 import { MailService } from "../mail/mail.service";
 
 const SALT_ROUNDS = 10;
-const OTP_TTL_MS = 5 * 60 * 1000; 
+const OTP_TTL_MS = 5 * 60 * 1000;
 
 @Injectable()
 export class AuthService {
@@ -45,7 +45,7 @@ export class AuthService {
     await this.mailService.sendOtp(email, code);
   }
 
-  
+
   async signup(dto: SignupDto) {
     const existing = await this.usersService.findByEmail(dto.email);
     if (existing) {
@@ -64,7 +64,7 @@ export class AuthService {
       await this.generateAndSendOtp(dto.email);
     } catch (err: any) {
       console.error(`[AuthService] Signup OTP dispatch failed for ${dto.email}:`, err?.message || err);
-      
+
       await this.usersService.remove(user.id);
       throw new BadRequestException(
         "We couldn't send the verification email. Please check your email address and try again.",
@@ -78,7 +78,7 @@ export class AuthService {
     };
   }
 
-  
+
   async verifyOtp(dto: VerifyOtpDto) {
     const record = await this.otpRepo.findOne({
       where: { email: dto.email, code: dto.code },
@@ -122,7 +122,7 @@ export class AuthService {
     return { message: `Verification OTP resent to ${dto.email}`, email: dto.email };
   }
 
-  
+
   async login(dto: LoginDto) {
     const user = await this.usersService.findByEmail(dto.email);
     if (!user) {
@@ -152,6 +152,4 @@ export class AuthService {
       token: this.signToken(user),
       user,
     };
-  }
-
-}
+  }}

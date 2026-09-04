@@ -9,7 +9,7 @@ export class CreateProductDto {
   @IsString()
   description?: string;
 
-  @Type(() => Number) // multipart/form-data sends everything as strings — convert before validating
+  @Type(() => Number)
   @IsNumber()
   @Min(0)
   price: number;
@@ -22,7 +22,7 @@ export class CreateProductDto {
 
   @IsOptional()
   @IsString()
-  imageUrl?: string; // set server-side from the uploaded file, not sent by the client anymore
+  imageUrl?: string;
 
   @IsOptional()
   @IsString()

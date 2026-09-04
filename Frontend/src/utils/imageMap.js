@@ -33,7 +33,7 @@ import food_32 from "../assets/frontend_assets/food_32.png";
 import momo_1 from "../assets/frontend_assets/momo_1.png";
 import jhol_momo from "../assets/frontend_assets/jhol_momo.png";
 
-export const imageMap = {
+const staticImageMap = {
   "food_1.png": food_1,
   "food_2.png": food_2,
   "food_3.png": food_3,
@@ -69,3 +69,38 @@ export const imageMap = {
   "momo_1.png": momo_1,
   "jhol_momo.png": jhol_momo,
 };
+
+const BACKEND_URL = import.meta.env?.VITE_API_URL || "http://localhost:5000";
+
+export const getImageUrl = (image) => {
+  if (!image) return food_1;
+  if (staticImageMap[image]) return staticImageMap[image];
+  if (staticImageMap[`${image}.png`]) return staticImageMap[`${image}.png`];
+
+  if (typeof image === "string") {
+    if (
+      image.startsWith("http://") ||
+      image.startsWith("https://") ||
+      image.startsWith("blob:") ||
+      image.startsWith("data:")
+    ) {
+      return image;
+    }
+    const cleanPath = image.startsWith("/") ? image : `/${image}`;
+    return `${BACKEND_URL}${cleanPath}`;
+  }
+
+  return image || food_1;
+};
+
+export const imageMap = new Proxy(staticImageMap, {
+  get(target, prop) {
+    if (typeof prop === "string") {
+      if (prop in target) {
+        return target[prop];
+      }
+      return getImageUrl(prop);
+    }
+    return target[prop];
+  },
+});

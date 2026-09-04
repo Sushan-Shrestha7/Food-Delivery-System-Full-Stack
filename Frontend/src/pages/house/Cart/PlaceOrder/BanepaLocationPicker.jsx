@@ -4,8 +4,8 @@ import "leaflet/dist/leaflet.css";
 
 
 const BANEPA_BOUNDS = [
-  [27.615, 85.51], 
-  [27.66, 85.545], 
+  [27.615, 85.51],
+  [27.66, 85.545],
 ];
 const BANEPA_CENTER = [27.6357, 85.522];
 
@@ -21,7 +21,7 @@ export default function BanepaLocationPicker({ onLocationSelect }) {
       zoom: 15,
       minZoom: 14,
       maxBounds: BANEPA_BOUNDS,
-      maxBoundsViscosity: 1.0, 
+      maxBoundsViscosity: 1.0,
     });
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -46,12 +46,12 @@ export default function BanepaLocationPicker({ onLocationSelect }) {
         const data = await res.json();
         const addr = data.address || {};
 
-        
+
         const line1 =
           addr.road || addr.neighbourhood || addr.suburb || data.display_name;
         const line2 = addr.suburb || addr.city_district || "";
         const district = addr.county || addr.state_district || "Kavre";
-        const province = "Bagmati"; 
+        const province = "Bagmati";
 
         onLocationSelect({
           line1,
@@ -65,8 +65,7 @@ export default function BanepaLocationPicker({ onLocationSelect }) {
         console.error("Reverse geocode failed:", err);
       } finally {
         setLoading(false);
-      }
-    });
+      }});
 
     return () => map.remove();
   }, [onLocationSelect]);
@@ -90,8 +89,6 @@ export default function BanepaLocationPicker({ onLocationSelect }) {
           }}
         >
           Locating...
-        </div>
-      )}
-    </div>
-  );
+        </div>)}
+    </div>);
 }

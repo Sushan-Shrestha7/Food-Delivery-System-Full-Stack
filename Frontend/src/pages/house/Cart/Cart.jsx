@@ -4,6 +4,7 @@ import "./Cart.css";
 import { StoreContext } from "../../../content/storeContext";
 import { useNavigate } from "react-router-dom";
 import { imageMap } from "../../../utils/imageMap";
+import { assets } from "../../../assets/frontend_assets/assets";
 
 const Cart = () => {
   const { url, token, removeFromCart } = useContext(StoreContext);
@@ -26,8 +27,7 @@ const Cart = () => {
       console.error("Failed to load cart", err);
     } finally {
       setLoading(false);
-    }
-  };
+    }};
 
   useEffect(() => {
     fetchCart();
@@ -70,8 +70,12 @@ const Cart = () => {
             <div key={item.id}>
               <div className="cart-items-title cart-items-item">
                 <img
-                  src={imageMap[item.product?.imageUrl]}
+                  src={imageMap[item.product?.imageUrl] || assets.food_1}
                   alt={item.product?.name}
+                  onError={(e) => {
+                    if (e.currentTarget.src !== assets.food_1) {
+                      e.currentTarget.src = assets.food_1;
+                    }}}
                 />
                 <p>{item.product?.name}</p>
                 <p>Rs{item.priceAtAdd}</p>
@@ -82,11 +86,9 @@ const Cart = () => {
                   onClick={() => handleRemove(item.productId)}
                 >
                   ×
-                </p>
-              </div>
+                </p></div>
               <hr />
-            </div>
-          ))
+            </div>))
         ) : (
           <p className="empty-cart-text">Your cart is empty.</p>
         )}
@@ -109,8 +111,7 @@ const Cart = () => {
             <div className="cart-totals-details">
               <b>Total</b>
               <b>Rs{grandTotal}</b>
-            </div>
-          </div>
+            </div></div>
 
           {checkoutError && <p className="error-text">{checkoutError}</p>}
 
@@ -119,8 +120,7 @@ const Cart = () => {
             disabled={!cart.items || cart.items.length === 0}
           >
             PROCEED TO CHECKOUT
-          </button>
-        </div>
+          </button></div>
 
         <div className="cart-promocode">
           <div>
@@ -128,12 +128,9 @@ const Cart = () => {
             <div className="cart-promocode-input">
               <input type="text" placeholder="promo code" />
               <button>Submit</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+            </div></div>
+        </div></div>
+    </div>);
 };
 
 export default Cart;

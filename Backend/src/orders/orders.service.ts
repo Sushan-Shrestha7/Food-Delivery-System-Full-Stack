@@ -137,10 +137,8 @@ export class OrdersService {
             "stock",
             item.quantity,
           );
-        }
-      }
+        }}
 
       return { message: "Order cancelled", order };
     });
-  }
-}
+  }}

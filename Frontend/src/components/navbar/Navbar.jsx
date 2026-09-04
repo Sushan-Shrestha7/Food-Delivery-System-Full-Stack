@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./Navbar.css";
 import { assets } from "../../assets/frontend_assets/assets";
@@ -15,6 +15,7 @@ const Navbar = ({ setShowLogin }) => {
   const {
     token,
     setToken,
+    isAdmin,
     cartItems,
     clearCart,
     url,
@@ -23,6 +24,7 @@ const Navbar = ({ setShowLogin }) => {
   } = useContext(StoreContext);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -31,8 +33,7 @@ const Navbar = ({ setShowLogin }) => {
         setAllProducts(res.data);
       } catch (err) {
         console.error("Failed to load products for search", err);
-      }
-    };
+      }};
     fetchProducts();
   }, [url]);
 
@@ -66,15 +67,13 @@ const Navbar = ({ setShowLogin }) => {
       navigate("/");
     } else {
       window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
+    }};
 
   const handleSearchIconClick = () => {
     setShowSearch((prev) => !prev);
     if (showSearch) {
       setSearchQuery("");
-    }
-  };
+    }};
 
   const searchResults =
     searchQuery && searchQuery.trim() !== ""
@@ -111,9 +110,35 @@ const Navbar = ({ setShowLogin }) => {
         >
           Contact
         </li>
+        {isAdmin && (
+          <li
+            className={
+              location.pathname.startsWith("/admin")
+                ? "active admin-nav-link"
+                : "admin-nav-link"
+            }
+            onClick={() => {
+              setMenu("ADMIN");
+              navigate("/admin/add-item");
+            }}
+          >
+            Add Item
+          </li>)}
       </ul>
 
       <div className="navbar-right">
+        {isAdmin && (
+          <button
+            className="navbar-admin-btn"
+            onClick={() => {
+              setMenu("ADMIN");
+              navigate("/admin/add-item");
+            }}
+            title="Admin - Add and Manage Items"
+          >
+            + Add Item
+          </button>)}
+
         <div className="navbar-search-wrapper">
           {showSearch && (
             <>
@@ -138,18 +163,23 @@ const Navbar = ({ setShowLogin }) => {
                           scrollToSection("food-display", "MENU");
                         }}
                       >
-                        <img src={imageMap[item.imageUrl]} alt={item.name} />
+                        <img
+                          src={imageMap[item.imageUrl] || assets.food_1}
+                          alt={item.name}
+                          onError={(e) => {
+                            if (e.currentTarget.src !== assets.food_1) {
+                              e.currentTarget.src = assets.food_1;
+                            }}}
+                        />
                         <div className="search-result-info">
                           <p className="search-result-name">{item.name}</p>
                           <p className="search-result-price">Rs{item.price}</p>
-                        </div>
-                      </div>
+                        </div></div>
                     ))
                   ) : (
                     <p className="search-no-results">No dishes found</p>
                   )}
-                </div>
-              )}
+                </div>)}
             </>
           )}
           <img
@@ -168,8 +198,7 @@ const Navbar = ({ setShowLogin }) => {
         {!token ? (
           <button className="navbar-sign-in" onClick={() => setShowLogin(true)}>
             Sign In
-          </button>
-        ) : (
+          </button>) : (
           <div className="navbar-profile">
             <img
               src={assets.profile_icon}
@@ -179,6 +208,20 @@ const Navbar = ({ setShowLogin }) => {
             />
             {showProfileMenu && (
               <ul className="navbar-profile-dropdown">
+                {isAdmin && (
+                  <>
+                    <li
+                      onClick={() => {
+                        setShowProfileMenu(false);
+                        navigate("/admin/add-item");
+                      }}
+                    >
+                      <span style={{ fontSize: "16px" }}>⚙️</span>
+                      <p>Admin Items</p>
+                    </li>
+                    <hr />
+                  </>
+                )}
                 <li onClick={() => navigate("/orders")}>
                   <img src={assets.bag_icon} alt="Orders" />
                   <p>Orders</p>
@@ -187,13 +230,10 @@ const Navbar = ({ setShowLogin }) => {
                 <li onClick={logout}>
                   <img src={assets.logout_icon} alt="Logout" />
                   <p>Logout</p>
-                </li>
-              </ul>
+                </li></ul>
             )}
-          </div>
-        )}
-      </div>
-    </div>
+          </div>)}
+      </div></div>
   );
 };
 

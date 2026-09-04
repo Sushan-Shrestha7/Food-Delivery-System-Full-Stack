@@ -52,8 +52,7 @@ const ChatWidget = () => {
       ]);
     } finally {
       setLoading(false);
-    }
-  };
+    }};
 
   return (
     <div className="chat-widget">
@@ -63,8 +62,7 @@ const ChatWidget = () => {
             <p>Ugrachandi Assistant</p>
             <button className="chat-close" onClick={() => setIsOpen(false)}>
               ×
-            </button>
-          </div>
+            </button></div>
 
           <div className="chat-messages">
             {messages.map((msg, i) => (
@@ -73,13 +71,11 @@ const ChatWidget = () => {
                 className={`chat-message ${msg.role === "user" ? "chat-message-user" : "chat-message-bot"}`}
               >
                 {msg.text}
-              </div>
-            ))}
+              </div>))}
             {loading && (
               <div className="chat-message chat-message-bot chat-typing">
                 Typing...
-              </div>
-            )}
+              </div>)}
             <div ref={messagesEndRef} />
           </div>
 
@@ -93,18 +89,15 @@ const ChatWidget = () => {
             />
             <button type="submit" disabled={loading || !input.trim()}>
               Send
-            </button>
-          </form>
-        </div>
-      )}
+            </button></form>
+        </div>)}
 
       <button
         className="chat-bubble-toggle"
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {isOpen ? "×" : "💬"}
-      </button>
-    </div>
+      </button></div>
   );
 };
 

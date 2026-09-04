@@ -39,5 +39,4 @@ export class AuthController {
   @Get("me")
   getMe(@CurrentUser() user: User) {
     return { user };
-  }
-}
+  }}

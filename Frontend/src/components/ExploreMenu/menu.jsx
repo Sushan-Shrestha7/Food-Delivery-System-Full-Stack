@@ -24,13 +24,11 @@ const Menu = ({ category, setcategory }) => {
                 alt=""
               />
               <p>{item.menu_name}</p>
-            </div>
-          );
+            </div>);
         })}
       </div>
       <hr />
-    </div>
-  );
+    </div>);
 };
 
 export default Menu;

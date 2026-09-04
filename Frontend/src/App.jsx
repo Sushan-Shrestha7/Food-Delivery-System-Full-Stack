@@ -37,8 +37,7 @@ const App = () => {
               </ProtectedAdminRoute>
             }
           />
-        </Routes>
-      </div>
+        </Routes></div>
 
       <Footer />
       <ChatWidget />

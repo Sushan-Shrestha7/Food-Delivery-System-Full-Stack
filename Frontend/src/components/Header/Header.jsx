@@ -8,8 +8,7 @@ const Header = () => {
         <h2>Ugrachandi Brings Delicious, Delivered Fresh</h2>
         <p>Choose from a variety of delicious meals</p>
         <p className="header-tagline">One bite and you'll be smiling</p>
-      </div>
-    </div>
+      </div></div>
   );
 };
 

@@ -103,5 +103,4 @@ export class CartService {
       await this.cartItemRepository.remove(cart.items);
     }
     return this.getCart(userId);
-  }
-}
+  }}

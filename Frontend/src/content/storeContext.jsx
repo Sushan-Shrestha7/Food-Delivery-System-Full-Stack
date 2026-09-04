@@ -6,10 +6,30 @@ export const StoreContext = createContext(null);
 
 const url = "http://localhost:5000";
 
+const parseJwt = (tok) => {
+  if (!tok) return null;
+  try {
+    const base64Url = tok.split(".")[1];
+    if (!base64Url) return null;
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join(""),
+    );
+    return JSON.parse(jsonPayload);
+  } catch {
+    return null;
+  }};
+
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [searchQuery, setSearchQuery] = useState("");
+
+  const user = parseJwt(token);
+  const isAdmin = user?.role === "admin";
 
   const authHeaders = () => ({
     headers: { Authorization: `Bearer ${token}` },
@@ -26,8 +46,7 @@ const StoreContextProvider = (props) => {
       setCartItems(items);
     } catch (err) {
       console.error("Failed to load cart", err);
-    }
-  };
+    }};
 
   const addToCart = async (itemId) => {
     if (!token) {
@@ -44,8 +63,7 @@ const StoreContextProvider = (props) => {
     } catch (err) {
       console.error("Failed to add to cart", err);
       loadCart();
-    }
-  };
+    }};
 
   const removeFromCart = async (itemId) => {
     if (!token) return;
@@ -63,12 +81,10 @@ const StoreContextProvider = (props) => {
           { productId: Number(itemId), quantity: newQty },
           authHeaders(),
         );
-      }
-    } catch (err) {
+      }} catch (err) {
       console.error("Failed to update cart", err);
       loadCart();
-    }
-  };
+    }};
 
   const clearCart = async () => {
     setCartItems({});
@@ -77,19 +93,19 @@ const StoreContextProvider = (props) => {
       await axios.delete(`${url}/api/cart/clear`, authHeaders());
     } catch (err) {
       console.error("Failed to clear cart", err);
-    }
-  };
+    }};
 
   useEffect(() => {
     if (token) {
       loadCart();
-    }
-  }, [token]);
+    }}, [token]);
 
   const contextValue = {
     url,
     token,
     setToken,
+    user,
+    isAdmin,
     food_list,
     cartItems,
     setCartItems,

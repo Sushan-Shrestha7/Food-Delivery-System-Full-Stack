@@ -11,7 +11,7 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const Login = ({ setShowLogin }) => {
   const { setToken } = useContext(StoreContext);
   const navigate = useNavigate();
-  const [currentState, setCurrentState] = useState("Log in"); 
+  const [currentState, setCurrentState] = useState("Log in");
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -25,7 +25,7 @@ const Login = ({ setShowLogin }) => {
   const [loading, setLoading] = useState(false);
   const [resendTimer, setResendTimer] = useState(0);
 
-  
+
   useEffect(() => {
     let interval = null;
     if (resendTimer > 0) {
@@ -64,7 +64,6 @@ const Login = ({ setShowLogin }) => {
       const response = await axios.post(url, payload);
 
       if (isSignUp) {
-        
         const activeEmail = response.data?.email || data.email.trim();
         setTargetEmail(activeEmail);
         setCurrentState("OTP");
@@ -76,12 +75,10 @@ const Login = ({ setShowLogin }) => {
         setToken(response.data.token);
         setShowLogin(false);
 
-        
+
         if (response.data.user && response.data.user.role === "admin") {
           navigate("/admin/add-item");
-        }
-      }
-    } catch (err) {
+        }}} catch (err) {
       const responseData = err.response?.data;
       const message =
         responseData?.message || "Something went wrong. Please try again.";
@@ -100,11 +97,9 @@ const Login = ({ setShowLogin }) => {
         );
       } else {
         setError(message);
-      }
-    } finally {
+      }} finally {
       setLoading(false);
-    }
-  };
+    }};
 
   const onVerifyOtpHandler = async (e) => {
     e.preventDefault();
@@ -130,19 +125,17 @@ const Login = ({ setShowLogin }) => {
       setToken(response.data.token);
       setShowLogin(false);
 
-      
+
       if (response.data.user && response.data.user.role === "admin") {
         navigate("/admin/add-item");
-      }
-    } catch (err) {
+      }} catch (err) {
       setError(
         err.response?.data?.message ||
           "Invalid or expired OTP. Please check and try again."
       );
     } finally {
       setLoading(false);
-    }
-  };
+    }};
 
   const onResendOtpHandler = async () => {
     if (loading || resendTimer > 0) return;
@@ -163,8 +156,7 @@ const Login = ({ setShowLogin }) => {
       setError(err.response?.data?.message || "Could not resend verification code.");
     } finally {
       setLoading(false);
-    }
-  };
+    }};
 
   const switchState = (newState) => {
     if (loading) return;
@@ -208,8 +200,7 @@ const Login = ({ setShowLogin }) => {
               onClick={() => switchState("Sign Up")}
             >
               Wrong email? Edit
-            </span>
-          </div>
+            </span></div>
         )}
 
         <div className="login-inputs">
@@ -254,8 +245,7 @@ const Login = ({ setShowLogin }) => {
                 onClick={() => setShowPassword((prev) => !prev)}
                 className="password-toggle-icon"
               />
-            </div>
-          )}
+            </div>)}
 
           {currentState === "OTP" && (
             <div className="otp-input-group">
@@ -274,8 +264,7 @@ const Login = ({ setShowLogin }) => {
                 disabled={loading}
                 className="otp-field"
               />
-            </div>
-          )}
+            </div>)}
         </div>
 
         {info && <div className="auth-alert alert-success">{info}</div>}
@@ -303,29 +292,25 @@ const Login = ({ setShowLogin }) => {
                   onClick={onResendOtpHandler}
                 >
                   Resend OTP
-                </span>
-              )}
+                </span>)}
             </p>
             <p className="otp-back-link" onClick={() => switchState("Log in")}>
               ← Back to Login
-            </p>
-          </div>
+            </p></div>
         )}
 
         {currentState !== "OTP" && (
           <div className="login-condition">
             <input type="checkbox" required />
             <p>By continuing, I agree to the terms of use & privacy policy.</p>
-          </div>
-        )}
+          </div>)}
 
         {currentState === "Log in" && (
           <p className="auth-toggle-prompt">
             Don't have an account?{" "}
             <span onClick={() => switchState("Sign Up")}>
               Create one here
-            </span>
-          </p>
+            </span></p>
         )}
 
         {currentState === "Sign Up" && (
@@ -333,11 +318,9 @@ const Login = ({ setShowLogin }) => {
             Already have an account?{" "}
             <span onClick={() => switchState("Log in")}>
               Sign In here
-            </span>
-          </p>
+            </span></p>
         )}
-      </form>
-    </div>
+      </form></div>
   );
 };
 

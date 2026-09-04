@@ -47,7 +47,6 @@ async function main() {
     console.log('✅ Email sent successfully! Message ID:', info.messageId);
   } catch (err) {
     console.error('❌ Error sending mail:', err);
-  }
-}
+  }}
 
 main();
