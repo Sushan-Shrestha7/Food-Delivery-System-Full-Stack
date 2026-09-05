@@ -1,0 +1,157 @@
+.banepa-picker-container {
+  margin-bottom: 20px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.banepa-picker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: #fafafa;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.banepa-picker-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.picker-icon {
+  font-size: 16px;
+}
+
+.banepa-loading-badge {
+  font-size: 12px;
+  color: #ff4c24;
+  background: #fff0ed;
+  border: 1px solid #ffd6ce;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.banepa-map-wrapper {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  z-index: 1;
+}
+
+.banepa-map-frame {
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+
+.banepa-picker-footer {
+  padding: 8px 14px;
+  background: #fafafa;
+  border-top: 1px solid #eeeeee;
+  font-size: 13px;
+}
+
+.banepa-selected-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.check-icon {
+  background: #2e7d32;
+  color: #ffffff;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+.banepa-hint-info {
+  color: #757575;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.banepa-custom-pin {
+  background: transparent;
+  border: none;
+}
+
+.banepa-marker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 36px;
+  height: 44px;
+}
+
+.banepa-marker-pin {
+  width: 36px;
+  height: 44px;
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.45));
+  animation: marker-drop 0.25s ease-out;
+  cursor: grab;
+}
+
+.banepa-marker-pin:active {
+  cursor: grabbing;
+}
+
+.banepa-marker-pulse {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 6px;
+  background: rgba(255, 76, 36, 0.5);
+  border-radius: 50%;
+  animation: pulse-dot 1.6s infinite;
+  pointer-events: none;
+}
+
+@keyframes marker-drop {
+  0% {
+    transform: translateY(-16px) scale(0.9);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-dot {
+  0% {
+    transform: translateX(-50%) scale(0.7);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateX(-50%) scale(1.8);
+    opacity: 0.15;
+  }
+  100% {
+    transform: translateX(-50%) scale(0.7);
+    opacity: 0.9;
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./PlaceOrder.css";
@@ -56,7 +56,7 @@ const PlaceOrder = () => {
   };
 
 
-  const onMapLocationSelect = ({ line1, line2, district, province }) => {
+  const onMapLocationSelect = useCallback(({ line1, line2, district, province }) => {
     setData((prev) => ({
       ...prev,
       line1: line1 ?? prev.line1,
@@ -64,7 +64,7 @@ const PlaceOrder = () => {
       district: district ?? prev.district,
       province: province ?? prev.province,
     }));
-  };
+  }, []);
 
   const isValidNepaliPhone = (phone) => /^(97|98)\d{8}$/.test(phone);
 
