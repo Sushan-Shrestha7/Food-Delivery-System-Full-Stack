@@ -256,12 +256,12 @@ const products = [
 
 
   {
-    name: "Steam Momo",
+    name: "Fried Momo",
     imageUrl: "momo_1.png",
     price: 180,
     category: "Momo",
     description:
-      "Traditional steamed dumplings filled with spiced minced meat and herbs",
+      "Traditional Fried dumplings filled with spiced minced meat and herbs",
   },
   {
     name: "Jhol Momo",
@@ -281,7 +281,7 @@ async function seed() {
   } catch (err) {
     console.warn(
       "productRepo.clear() failed (likely a foreign key constraint from existing orders). " +
-        "Falling back to delete-all instead.",
+      "Falling back to delete-all instead.",
     );
     await productRepo.createQueryBuilder().delete().from(Product).execute();
   }

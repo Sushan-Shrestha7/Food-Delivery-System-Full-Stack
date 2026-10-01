@@ -46,7 +46,8 @@ const PlaceOrder = () => {
         console.error("Failed to load cart totals", err);
       } finally {
         setCartLoading(false);
-      }};
+      }
+    };
     fetchCart();
   }, [url, token]);
 
@@ -55,21 +56,25 @@ const PlaceOrder = () => {
     setData((prev) => ({ ...prev, [name]: value }));
   };
 
-
-  const onMapLocationSelect = useCallback(({ line1, line2, district, province }) => {
-    setData((prev) => ({
-      ...prev,
-      line1: line1 ?? prev.line1,
-      line2: line2 ?? prev.line2,
-      district: district ?? prev.district,
-      province: province ?? prev.province,
-    }));
-  }, []);
+  const onMapLocationSelect = useCallback(
+    ({ line1, line2, district, province }) => {
+      setData((prev) => ({
+        ...prev,
+        line1: line1 ?? prev.line1,
+        line2: line2 ?? prev.line2,
+        district: district ?? prev.district,
+        province: province ?? prev.province,
+      }));
+    },
+    []
+  );
 
   const isValidNepaliPhone = (phone) => /^(97|98)\d{8}$/.test(phone);
 
   const deliveryFee = cartTotal === 0 ? 0 : 50;
   const grandTotal = cartTotal === 0 ? 0 : cartTotal + deliveryFee;
+
+
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
@@ -81,34 +86,34 @@ const PlaceOrder = () => {
       return;
     }
 
-    setLoading(true);
-    try {
-      const payload = {
-        deliveryAddress: {
-          line1: data.line1,
-          line2: data.line2 || undefined,
-          city: data.district,
-          state: data.province,
-          postalCode: "00000",
-          country: "Nepal",
-          phone: data.phone,
-        },
-        paymentMethod,
-      };
+    const deliveryAddress = {
+      line1: data.line1,
+      line2: data.line2 || undefined,
+      city: data.district,
+      state: data.province,
+      postalCode: "00000",
+      country: "Nepal",
+      phone: data.phone,
+    };
 
+    setLoading(true);
+
+    try {
+      // All payment methods (including eSewa) use the same order placement flow
+      const payload = { deliveryAddress, paymentMethod };
       const res = await axios.post(`${url}/api/orders/place`, payload, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       setSuccessMessage("🎉 Order placed successfully! Redirecting...");
-
       setTimeout(() => {
         navigate("/orders", { state: { order: res.data.order } });
       }, 1500);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to place order");
       setLoading(false);
-    }};
+    }
+  };
 
   return (
     <form className="place-order" onSubmit={onSubmitHandler}>
@@ -118,7 +123,6 @@ const PlaceOrder = () => {
         {error && <p className="error-text">{error}</p>}
         {successMessage && <p className="success-text">{successMessage}</p>}
 
-        {}
         <BanepaLocationPicker onLocationSelect={onMapLocationSelect} />
 
         <input
@@ -155,8 +159,10 @@ const PlaceOrder = () => {
             {NEPAL_PROVINCES.map((p) => (
               <option key={p} value={p}>
                 {p}
-              </option>))}
-          </select></div>
+              </option>
+            ))}
+          </select>
+        </div>
 
         <input
           name="landmark"
@@ -181,10 +187,14 @@ const PlaceOrder = () => {
           value={paymentMethod}
           onChange={(e) => setPaymentMethod(e.target.value)}
         >
-          <option value="cod">Cash on Delivery</option>
-          <option value="card">Card</option>
-          <option value="wallet">Wallet</option>
-        </select></div>
+          <option value="cod">💵 Cash on Delivery</option>
+          <option value="esewa">🟢 eSewa (Digital Wallet)</option>
+          <option value="card">💳 Card</option>
+          <option value="wallet">👛 Wallet</option>
+        </select>
+
+
+      </div>
 
       <div className="place-order-right">
         <div className="cart-totals">
@@ -203,11 +213,18 @@ const PlaceOrder = () => {
             <div className="cart-totals-details">
               <b>Total</b>
               <b>{cartLoading ? "..." : `Rs${grandTotal}`}</b>
-            </div></div>
-          <button type="submit" disabled={loading || cartLoading}>
-            {loading ? "PLACING ORDER..." : "PROCEED TO PAYMENT"}
-          </button></div>
-      </div></form>
+            </div>
+          </div>
+          <button
+            type="submit"
+            id="place-order-submit-btn"
+            disabled={loading || cartLoading}
+          >
+            {loading ? "PLACING ORDER..." : "PLACE ORDER"}
+          </button>
+        </div>
+      </div>
+    </form>
   );
 };
 

@@ -23,6 +23,13 @@ export enum PaymentMethod {
   COD = 'cod',
   CARD = 'card',
   WALLET = 'wallet',
+  ESEWA = 'esewa',
+}
+
+export enum PaymentStatus {
+  PENDING = 'pending',
+  PAID = 'paid',
+  FAILED = 'failed',
 }
 
 @Entity('orders')
@@ -68,6 +75,12 @@ export class Order {
 
   @Column({ type: 'enum', enum: OrderStatus, default: OrderStatus.PLACED })
   status: OrderStatus;
+
+  @Column({ type: 'varchar', nullable: true })
+  transactionCode: string | null;
+
+  @Column({ type: 'enum', enum: PaymentStatus, default: PaymentStatus.PENDING })
+  paymentStatus: PaymentStatus;
 
   @CreateDateColumn()
   placedAt: Date;

@@ -1,0 +1,137 @@
+/* ─── Page wrapper ─── */
+.failure-page {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: radial-gradient(ellipse at 50% 0%, #fff5f5 0%, #fafafa 60%);
+}
+
+/* ─── Card ─── */
+.failure-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 52px 44px 44px;
+  max-width: 460px;
+  width: 100%;
+  text-align: center;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.04),
+    0 20px 48px rgba(0, 0, 0, 0.08);
+}
+
+.failure-card h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #b91c1c;
+  margin: 16px 0 8px;
+}
+
+.failure-sub {
+  color: #6b7280;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* ─── Animated X SVG ─── */
+.failure-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.failure-x {
+  width: 76px;
+  height: 76px;
+}
+
+.failure-circle {
+  stroke: #dc2626;
+  stroke-width: 2;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.failure-cross {
+  stroke: #dc2626;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: stroke 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.55s forwards;
+}
+
+@keyframes stroke {
+  100% { stroke-dashoffset: 0; }
+}
+
+/* ─── Tips box ─── */
+.failure-tips {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 14px 18px;
+  text-align: left;
+  margin-bottom: 28px;
+}
+
+.failure-tips p {
+  font-size: 14px;
+  color: #7f1d1d;
+  margin: 0 0 8px;
+}
+
+.failure-tips ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #9b2c2c;
+  font-size: 13.5px;
+  line-height: 1.8;
+}
+
+/* ─── Action buttons ─── */
+.failure-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.failure-btn-retry {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 12px rgba(239, 68, 68, 0.3);
+}
+
+.failure-btn-retry:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.42);
+}
+
+.failure-btn-outline {
+  background: transparent;
+  color: #374151;
+  border: 1.5px solid #d1d5db;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.failure-btn-outline:hover {
+  border-color: #ef4444;
+  color: #b91c1c;
+}

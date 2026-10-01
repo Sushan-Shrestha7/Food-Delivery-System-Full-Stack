@@ -5,7 +5,7 @@ import {
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { DataSource, Repository } from "typeorm";
-import { Order, OrderStatus } from "./entities/order.entity";
+import { Order, OrderStatus, PaymentStatus } from "./entities/order.entity";
 import { OrderItem } from "./entities/order-item.entity";
 import { Cart } from "../cart/entities/cart.entity";
 import { CartItem } from "../cart/entities/cart-item.entity";
@@ -79,6 +79,78 @@ export class OrdersService {
         totalAmount,
         paymentMethod: dto.paymentMethod,
         status: OrderStatus.PLACED,
+      });
+      const savedOrder = await manager.save(Order, order);
+
+      await manager.remove(CartItem, cart.items);
+
+      return { message: "Order placed successfully", order: savedOrder };
+    });
+  }
+
+  async placeOrderFromVerifiedPayment(
+    userId: string,
+    dto: PlaceOrderDto,
+    transactionCode: string,
+  ) {
+    return this.dataSource.transaction(async (manager) => {
+      const cart = await manager.findOne(Cart, {
+        where: { userId },
+        relations: { items: { product: true } },
+      });
+
+      if (!cart || cart.items.length === 0) {
+        throw new BadRequestException("Cart is empty, nothing to order");
+      }
+
+      const orderItems: OrderItem[] = [];
+      let itemsTotal = 0;
+
+      for (const cartItem of cart.items) {
+        const product = await manager.findOne(Product, {
+          where: { id: cartItem.productId },
+          lock: { mode: "pessimistic_write" },
+        });
+
+        if (!product) {
+          throw new BadRequestException(
+            `Product ${cartItem.productId} no longer exists`,
+          );
+        }
+        if (product.stock < cartItem.quantity) {
+          throw new BadRequestException(
+            `Insufficient stock for ${product.name}`,
+          );
+        }
+
+        const orderItem = manager.create(OrderItem, {
+          product,
+          productId: product.id,
+          name: product.name,
+          quantity: cartItem.quantity,
+          price: cartItem.priceAtAdd,
+        });
+        orderItems.push(orderItem);
+
+        itemsTotal += Number(cartItem.priceAtAdd) * cartItem.quantity;
+
+        product.stock -= cartItem.quantity;
+        await manager.save(Product, product);
+      }
+
+      const totalAmount = itemsTotal + FLAT_DELIVERY_FEE;
+
+      const order = manager.create(Order, {
+        userId,
+        items: orderItems,
+        deliveryAddress: dto.deliveryAddress,
+        itemsTotal,
+        deliveryFee: FLAT_DELIVERY_FEE,
+        totalAmount,
+        paymentMethod: dto.paymentMethod,
+        status: OrderStatus.PLACED,
+        transactionCode,
+        paymentStatus: PaymentStatus.PAID,
       });
       const savedOrder = await manager.save(Order, order);
 

@@ -136,3 +136,77 @@
     max-width: 100%;
   }
 }
+
+/* ─── eSewa Payment Info Box ─── */
+.esewa-info-box {
+  background: linear-gradient(135deg, #edfff0 0%, #f0fff4 100%);
+  border: 1.5px solid #60bb46;
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  animation: fadeInSlide 0.3s ease;
+}
+
+@keyframes fadeInSlide {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.esewa-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.esewa-dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #60bb46;
+  box-shadow: 0 0 0 3px #b8f5a0;
+  flex-shrink: 0;
+}
+
+.esewa-info-box p {
+  color: #2d6a1e;
+  font-size: 13.5px;
+  margin: 0 0 6px;
+}
+
+.esewa-test-creds {
+  background: rgba(96, 187, 70, 0.12);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-top: 10px;
+}
+
+.esewa-test-creds p {
+  margin: 2px 0;
+  font-size: 13px;
+}
+
+.esewa-test-creds code {
+  background: #d4f5c6;
+  color: #1a6a00;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-family: monospace;
+  font-weight: 600;
+}
+
+/* eSewa green submit button */
+.esewa-submit-btn {
+  background: linear-gradient(135deg, #60bb46 0%, #4da832 100%) !important;
+  box-shadow: 0 3px 12px rgba(96, 187, 70, 0.4);
+  transition: all 0.2s ease !important;
+}
+
+.esewa-submit-btn:hover {
+  background: linear-gradient(135deg, #4da832 0%, #3d8e26 100%) !important;
+  box-shadow: 0 5px 16px rgba(96, 187, 70, 0.55) !important;
+  transform: translateY(-1px);
+}
+

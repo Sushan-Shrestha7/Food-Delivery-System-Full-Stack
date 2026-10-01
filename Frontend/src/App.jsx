@@ -12,6 +12,9 @@ import ChatWidget from "./components/ChatWidget/ChatWidget";
 import AdminLogin from "./pages/house/Admin/AdminLogin";
 import AddItem from "./pages/house/Admin/AdminItem";
 import ProtectedAdminRoute from "./pages/house/Admin/ProtectedAdminRoute";
+import PaymentSuccess from "./pages/house/Cart/PlaceOrder/PaymentSuccess";
+import PaymentFailure from "./pages/house/Cart/PlaceOrder/PaymentFailure";
+
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -28,6 +31,8 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<PlaceOrder />} />
           <Route path="/orders" element={<Orders />} />
+          <Route path="/payment/success" element={<PaymentSuccess />} />
+          <Route path="/payment/failure" element={<PaymentFailure />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route
             path="/admin/add-item"
