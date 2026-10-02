@@ -3,6 +3,7 @@ import axios from "axios";
 import { StoreContext } from "../../../content/storeContext";
 import { imageMap } from "../../../utils/imageMap";
 import { assets } from "../../../assets/frontend_assets/assets";
+import AdminAnalytics from "./AdminAnalytics";
 import "./Admin.css";
 
 const AddItem = () => {
@@ -236,7 +237,18 @@ const AddItem = () => {
             }}
           >
             🗑️ Delete / Manage Items ({products.length})
-          </button></div>
+          </button>
+          <button
+            type="button"
+            className={`admin-tab-btn ${activeTab === "analytics" ? "active" : ""}`}
+            onClick={() => {
+              setActiveTab("analytics");
+              setMessage({ text: "", type: "" });
+            }}
+          >
+            📊 Analytics
+          </button>
+        </div>
 
 
         {activeTab === "add" && (
@@ -455,6 +467,8 @@ const AddItem = () => {
                   </tbody></table>
               </div>)}
           </div>)}
+
+        {activeTab === "analytics" && <AdminAnalytics />}
       </div></div>
   );
 };
