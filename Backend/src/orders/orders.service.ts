@@ -5,7 +5,7 @@ import {
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { DataSource, Repository } from "typeorm";
-import { Order, OrderStatus, PaymentStatus } from "./entities/order.entity";
+import { Order, OrderStatus, PaymentStatus, PaymentMethod } from "./entities/order.entity";
 import { OrderItem } from "./entities/order-item.entity";
 import { Cart } from "../cart/entities/cart.entity";
 import { CartItem } from "../cart/entities/cart-item.entity";
@@ -20,7 +20,7 @@ export class OrdersService {
     @InjectRepository(Order)
     private readonly ordersRepository: Repository<Order>,
     private readonly dataSource: DataSource,
-  ) {}
+  ) { }
 
   async placeOrder(userId: string, dto: PlaceOrderDto) {
     return this.dataSource.transaction(async (manager) => {
@@ -177,7 +177,7 @@ export class OrdersService {
     return order;
   }
 
-  async cancelOrder(userId: string, id: string) {
+  async cancelOrder(userId: string, id: string, reason?: string) {
     return this.dataSource.transaction(async (manager) => {
       const order = await manager.findOne(Order, {
         where: { id, userId },
@@ -187,10 +187,9 @@ export class OrdersService {
         throw new NotFoundException("Order not found");
       }
       if (
-        [
-          OrderStatus.DELIVERED,
-          OrderStatus.CANCELLED,
-          OrderStatus.OUT_FOR_DELIVERY,
+        ![
+          OrderStatus.PLACED,
+          OrderStatus.CONFIRMED,
         ].includes(order.status)
       ) {
         throw new BadRequestException(
@@ -198,7 +197,26 @@ export class OrdersService {
         );
       }
 
+      const CANCEL_TIME_LIMIT_MINUTES = 1;
+      const orderAgeMinutes = (new Date().getTime() - order.placedAt.getTime()) / (1000 * 60);
+      if (orderAgeMinutes > CANCEL_TIME_LIMIT_MINUTES) {
+        throw new BadRequestException(
+          `Orders can only be cancelled within 60 seconds of being placed.`
+        );
+      }
+
       order.status = OrderStatus.CANCELLED;
+      if (reason) {
+        order.cancellationReason = reason;
+      }
+
+      if (
+        order.paymentMethod !== PaymentMethod.COD &&
+        order.paymentStatus === PaymentStatus.PAID
+      ) {
+        order.paymentStatus = PaymentStatus.REFUNDED;
+      }
+
       await manager.save(Order, order);
 
       for (const item of order.items) {
@@ -209,8 +227,10 @@ export class OrdersService {
             "stock",
             item.quantity,
           );
-        }}
+        }
+      }
 
       return { message: "Order cancelled", order };
     });
-  }}
+  }
+}

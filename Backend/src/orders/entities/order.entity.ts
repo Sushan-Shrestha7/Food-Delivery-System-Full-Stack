@@ -14,6 +14,8 @@ import { OrderItem } from './order-item.entity';
 export enum OrderStatus {
   PLACED = 'placed',
   CONFIRMED = 'confirmed',
+  PREPARING = 'preparing',
+  READY_FOR_PICKUP = 'ready_for_pickup',
   OUT_FOR_DELIVERY = 'out_for_delivery',
   DELIVERED = 'delivered',
   CANCELLED = 'cancelled',
@@ -30,6 +32,7 @@ export enum PaymentStatus {
   PENDING = 'pending',
   PAID = 'paid',
   FAILED = 'failed',
+  REFUNDED = 'refunded',
 }
 
 @Entity('orders')
@@ -81,6 +84,9 @@ export class Order {
 
   @Column({ type: 'enum', enum: PaymentStatus, default: PaymentStatus.PENDING })
   paymentStatus: PaymentStatus;
+
+  @Column({ type: 'varchar', nullable: true })
+  cancellationReason: string | null;
 
   @CreateDateColumn()
   placedAt: Date;
